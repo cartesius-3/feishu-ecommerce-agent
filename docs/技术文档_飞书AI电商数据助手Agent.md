@@ -1,10 +1,5 @@
 ﻿# 飞书AI电商数据助手Agent — 技术文档
 
-> 基础项目：Agent_feishu (KDHR9100, MIT License)  
-> NL2SQL参考：shopkeeper-agent (didilili, 217⭐, MIT)  
-> 飞书集成参考：botmux (769⭐) + iflow-bot (221⭐)  
-> 核心升级（已实现）：动态NL2SQL + LangGraph条件路由 + MCP工具层 + 飞书多维表格监控
-
 ---
 
 ## 一、系统架构全景
@@ -161,7 +156,7 @@ validate_sql
 
 ## 三、NL2SQL管线详解（12节点）
 
-> **不是 LangChain 自带的 SQL Agent。** LangChain 的 `SQLDatabaseChain` / `create_sql_agent` 做法是把整个数据库 Schema 一次性扔给 LLM 让它直接写 SQL——没有检索、没有过滤、没有校验。电商几百个字段的场景下，LLM 根本不知道用户说的"毛利率"对应哪列、"华东区"是哪个维度值，准确率不到 60%。本项目的 NL2SQL 管线参考 shopkeeper-agent 完全自建：先检索定位字段和取值、再过滤压缩上下文、再生成 SQL、再双重校验修正。LangChain 只用于节点内调用 LLM，Schema 管理、检索、校验全部自己实现。
+> **不是 LangChain 自带的 SQL Agent。** LangChain 的 `SQLDatabaseChain` / `create_sql_agent` 做法是把整个数据库 Schema 一次性扔给 LLM 让它直接写 SQL——没有检索、没有过滤、没有校验。电商几百个字段的场景下，LLM 根本不知道用户说的"毛利率"对应哪列、"华东区"是哪个维度值，准确率不到 60%。本项目的 NL2SQL 管线完全自建：先检索定位字段和取值、再过滤压缩上下文、再生成 SQL、再双重校验修正。LangChain 只用于节点内调用 LLM，Schema 管理、检索、校验全部自己实现。
 
 ### 3.1 关键词提取
 

@@ -1,8 +1,5 @@
 # 飞书AI电商数据助手Agent — 业务文档
 
-> 基础项目：Agent_feishu (KDHR9100, MIT License)  
-> 核心升级：动态NL2SQL + MCP工具层 + LangGraph条件路由 + 飞书多维表格监控看板
-
 ---
 
 ## 一、项目一句话描述

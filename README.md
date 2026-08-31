@@ -2,9 +2,7 @@
 
 飞书群里 @机器人 用自然语言问电商数据（"华东区上个月毛利率超过40%的SKU有哪些？"），Agent 自动识别意图 → 动态 NL2SQL 查数仓 / 调 MCP 工具 → LLM 生成分析报告 → 飞书返回结果。覆盖**商品 / 广告 / 库存预警 / 营销文案 / 文件分析 / 即席数据问答**六大电商场景。
 
-**本仓库为公开版**：完整代码 + 架构/业务文档。外部服务（数仓/向量库/LLM/飞书）全部支持 mock 模式，**零 API Key、离线可跑通全链路**。
-
-> ⚠️ 项目基于开源参考实现（Agent_feishu / shopkeeper-agent / botmux，均 MIT），核心升级部分自研。生产对接（店小秘/领星 ERP、真实数仓）代码以适配器占位，见 [技术文档](docs/技术文档_飞书AI电商数据助手Agent.md)。
+**本仓库为公开版**：完整代码 + 架构/业务文档。外部服务（数仓/向量库/LLM/飞书）全部支持 mock 模式，**零 API Key、离线可跑通全链路**。生产对接（店小秘/领星 ERP、真实数仓）代码以适配器占位，见 [技术文档](docs/技术文档_飞书AI电商数据助手Agent.md)。
 
 ---
 
@@ -106,4 +104,4 @@ feishu-ecommerce-agent/
 
 ## License
 
-MIT（参考开源：Agent_feishu / shopkeeper-agent / botmux，均 MIT）
+MIT License
