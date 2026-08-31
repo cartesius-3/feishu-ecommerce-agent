@@ -1,0 +1,51 @@
+# 运行时依赖：MySQL 数仓 + Milvus + Elasticsearch + TEI 一键启动
+# 用法：docker compose -f docker/docker-compose.yml up -d
+# 提示：仅离线演示（DW_MODE=mock）时无需启动本编排。
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: ecommerce-dw
+    environment:
+      MYSQL_ROOT_PASSWORD: change-me
+      MYSQL_DATABASE: ecommerce_dw
+      # 只读账号（五层安全第 5 层）
+      MYSQL_USER: readonly
+      MYSQL_PASSWORD: readonly-pw
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init-dw.sql:/docker-entrypoint-initdb.d/init-dw.sql:ro
+
+  milvus:
+    image: milvusdb/milvus:v2.5.4
+    container_name: ecommerce-milvus
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_USE_EMBED: "true"
+      ETCD_DATA_DIR: /var/lib/milvus/etcd
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    volumes:
+      - milvus-data:/var/lib/milvus
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    container_name: ecommerce-es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+
+  tei:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.5
+    container_name: ecommerce-tei
+    command: ["--model-id", "BAAI/bge-large-zh-v1.5"]
+    ports:
+      - "8080:80"
+
+volumes:
+  milvus-data:
