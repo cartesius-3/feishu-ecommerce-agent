@@ -1,6 +1,6 @@
 # 飞书 AI 电商数据 Agent — 系统架构图
 
-> 基于张云阳简历中「飞书 AI 电商数据 Agent」项目绘制。Mermaid 兼容版，可在 VS Code / GitHub / Mermaid Live Editor 中直接渲染。
+> 基于「飞书 AI 电商数据 Agent」项目实际架构绘制。Mermaid 兼容版，可在 VS Code / GitHub / Mermaid Live Editor 中直接渲染。
 
 ```mermaid
 graph TD

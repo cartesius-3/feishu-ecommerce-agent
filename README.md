@@ -81,11 +81,11 @@ feishu-ecommerce-agent/
 │   └── monitoring/             # MonitoringStats + 飞书看板同步
 ├── docker/                     # MySQL + Milvus + ES + TEI 一键编排（生产模式）
 ├── scripts/                    # init_db / build_meta_knowledge
-├── docs/                       # 技术文档 / 业务文档 / 工具场景 / 架构图 / 流程图
+├── docs/                       # 技术文档 / 业务文档 / 架构图 / 流程图
 └── requirements.txt
 ```
 
-## 设计要点（面试高频）
+## 设计要点
 
 - **为什么条件边 + LLM 路由结合**：业务规则用条件边（确定性判断），语义理解用 LLM 路由（意图识别）。命门：**判断在节点、选路在边**——节点里 LLM 把结果写进 state，条件边只读 state 分发，不重新判断。
 - **NL2SQL 为什么自建不直接用 LangChain SQL Agent**：整库 Schema 扔给 LLM 硬猜准确率 <60%；自建 = 先检索定位字段/取值（向量管语义、ES 管字面），再压缩上下文，再生成，再 EXPLAIN 校验修正——准确率提到 85%（200+ 回归集）。
